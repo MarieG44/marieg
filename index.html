@@ -9,18 +9,16 @@
   <style>
     /* ===================== THEME ===================== */
     :root{
-      /* DARK (default) */
-      --bg:#3e5072;          /* site background (your current dark) */
+      --bg:#3e5072;
       --panel:#454f66;       /* card & button background */
       --text:#eef1ff;
       --muted:#bfcaf0;
-      --ring:#2a4466;        /* borders / outlines */
+      --ring:#2a4466;
       --shadow:0 10px 30px rgba(0,0,0,.25);
     }
     :root.light{
-      /* LIGHT */
       --bg:#f7f9ff;
-      --panel:#ffffff;       /* card & button background */
+      --panel:#ffffff;
       --text:#0b1020;
       --muted:#5a688b;
       --ring:#d9e2ff;
@@ -33,7 +31,6 @@
     body{margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--text)}
     .container{max-width:1100px; margin:0 auto; padding:24px}
 
-    /* Neutral link color (no pink/green) */
     a{color:var(--text); text-decoration:none}
     a:hover{text-decoration:underline}
 
@@ -42,23 +39,36 @@
       display:inline-flex; align-items:center; gap:8px;
       padding:10px 14px; border-radius:12px; border:1px solid var(--ring);
       background:var(--panel); color:var(--text); text-decoration:none;
-      box-shadow:var(--shadow)
+      box-shadow:var(--shadow);
+      font-size:1rem; line-height:1.6;
     }
-    /* Make "primary" & "ghost" look like normal buttons (no gradients) */
-    .btn--primary{ background:var(--panel); border-color:var(--ring); color:var(--text); }
-    .btn--ghost{   background:var(--panel); border-color:var(--ring); color:var(--text); }
-    .btn:hover{ background:color-mix(in oklab, var(--panel) 88%, white); text-decoration:none }
+    .btn--ghost{background:var(--panel)}                 /* nav buttons */
+    .btn--primary{background:var(--panel)}               /* not used now */
+
+    /* QUIET link buttons (inside cards) */
+    .btn--quiet{
+      background:transparent;
+      border:1px solid var(--ring);
+      color:var(--muted);          /* match skills chip text color */
+      box-shadow:none;             /* remove shadow */
+      padding:6px 10px;            /* lighter touch */
+      border-radius:10px;
+      font-size:1rem;              /* same as body text inside cards */
+      line-height:1.6;
+    }
+    .btn--quiet:hover{
+      background:color-mix(in oklab, var(--panel) 85%, transparent);
+      text-decoration:none;
+    }
 
     header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(160%) blur(8px); background:color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid color-mix(in oklab, var(--ring) 50%, transparent)}
     nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
     .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; font-weight:700}
-    /* Logo button — match cards/buttons */
     .logo{
       width:34px; height:34px; border-radius:10px; display:grid; place-items:center;
       background:var(--panel); color:var(--text); border:1px solid var(--ring); box-shadow:var(--shadow)
     }
 
-    /* Toggle (kept neutral) */
     .toggle{
       border:1px solid var(--ring); border-radius:999px; padding:8px 12px; background:var(--panel);
       display:inline-flex; align-items:center; gap:8px; color:var(--text)
@@ -108,7 +118,7 @@
       border:1px dashed var(--ring); color:var(--muted); background:transparent;
     }
 
-    /* ===== Project meta (homogenous inside cards) ===== */
+    /* ===== Project meta ===== */
     .proj-meta{margin:6px 0 8px 0; color:var(--muted); font-weight:600}
     .proj-meta strong{color:inherit; font-weight:700}
   </style>
@@ -119,13 +129,10 @@
       <nav aria-label="Primary">
         <a class="brand" href="#top"><span class="logo">Y</span> Your Name</a>
         <div style="display:flex; gap:10px; align-items:center">
-          <!-- Top nav buttons now match card/button color -->
-          <a class="btn" href="#experience">Experience</a>
-          <a class="btn" href="#projects">Projects</a>
-          <a class="btn" href="#skills">Skills</a>
-          <a class="btn" href="#contact">Contact</a>
-
-          <!-- Theme toggle -->
+          <a class="btn btn--ghost" href="#experience">Experience</a>
+          <a class="btn btn--ghost" href="#projects">Projects</a>
+          <a class="btn btn--ghost" href="#skills">Skills</a>
+          <a class="btn btn--ghost" href="#contact">Contact</a>
           <button id="themeToggle" type="button" class="toggle" aria-pressed="false" title="Toggle theme">
             <span id="themeIcon">🌙</span><span id="themeLabel">Dark</span>
           </button>
@@ -171,9 +178,9 @@
               <span class="badge">Python</span><span class="badge">React</span><span class="badge">A/B Testing</span><span class="badge">SQL</span>
             </div>
             <p style="margin-top:10px">
-              <a class="btn" href="https://company.com" target="_blank" rel="noopener">Company Site ↗</a>
-              <a class="btn" href="https://github.com/yourname/feature-x" target="_blank" rel="noopener">Feature PR ↗</a>
-              <a class="btn" href="https://yourblog.example.com/case-study" target="_blank" rel="noopener">Case Study ↗</a>
+              <a class="btn btn--quiet" href="https://company.com" target="_blank" rel="noopener">Company Site ↗</a>
+              <a class="btn btn--quiet" href="https://github.com/yourname/feature-x" target="_blank" rel="noopener">Feature PR ↗</a>
+              <a class="btn btn--quiet" href="https://yourblog.example.com/case-study" target="_blank" rel="noopener">Case Study ↗</a>
             </p>
           </div>
         </div>
@@ -191,8 +198,8 @@
               <span class="badge">Go</span><span class="badge">CI/CD</span><span class="badge">Load Testing</span>
             </div>
             <p style="margin-top:10px">
-              <a class="btn" href="#" aria-disabled="true">Internal Wiki (private)</a>
-              <a class="btn" href="https://github.com/yourname/tools" target="_blank" rel="noopener">Tools Repo ↗</a>
+              <a class="btn btn--quiet" href="#" aria-disabled="true">Internal Wiki (private)</a>
+              <a class="btn btn--quiet" href="https://github.com/yourname/tools" target="_blank" rel="noopener">Tools Repo ↗</a>
             </p>
           </div>
         </div>
@@ -210,7 +217,7 @@
               <span class="badge">BigQuery</span><span class="badge">dbt</span><span class="badge">Dashboarding</span>
             </div>
             <p style="margin-top:10px">
-              <a class="btn" href="https://github.com/yourname/marketing-analytics" target="_blank" rel="noopener">Analytics Hub ↗</a>
+              <a class="btn btn--quiet" href="https://github.com/yourname/marketing-analytics" target="_blank" rel="noopener">Analytics Hub ↗</a>
             </p>
           </div>
         </div>
@@ -234,8 +241,8 @@
               <span class="badge">Event Ops</span><span class="badge">Leadership</span><span class="badge">Notion</span>
             </div>
             <p style="margin-top:10px">
-              <a class="btn" href="https://club.example.com" target="_blank" rel="noopener">Club Site ↗</a>
-              <a class="btn" href="#" aria-disabled="true">Drive Folder (private)</a>
+              <a class="btn btn--quiet" href="https://club.example.com" target="_blank" rel="noopener">Club Site ↗</a>
+              <a class="btn btn--quiet" href="#" aria-disabled="true">Drive Folder (private)</a>
             </p>
           </div>
         </div>
@@ -251,7 +258,7 @@
               <span class="badge">Fundraising</span><span class="badge">Social Media</span>
             </div>
             <p style="margin-top:10px">
-              <a class="btn" href="https://instagram.com/club" target="_blank" rel="noopener">Event Recap ↗</a>
+              <a class="btn btn--quiet" href="https://instagram.com/club" target="_blank" rel="noopener">Event Recap ↗</a>
             </p>
           </div>
         </div>
@@ -270,7 +277,7 @@
           </div>
           <p>ETL + dashboard for campaign performance, LTV, and cohort retention.</p>
           <div class="badges"><span class="badge">Python</span><span class="badge">BigQuery</span><span class="badge">dbt</span></div>
-          <p><a class="btn" href="https://github.com/yourname/marketing-analytics" target="_blank" rel="noopener">Source ↗</a></p>
+          <p><a class="btn btn--quiet" href="https://github.com/yourname/marketing-analytics" target="_blank" rel="noopener">Source ↗</a></p>
         </article>
         <article class="card">
           <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop" alt="Mobile app mockup" />
@@ -280,7 +287,7 @@
           </div>
           <p>Android mood tracker using on-device ML for sentiment.</p>
           <div class="badges"><span class="badge">Kotlin</span><span class="badge">TFLite</span></div>
-          <p><a class="btn" href="https://github.com/yourname/emotilog" target="_blank" rel="noopener">Source ↗</a></p>
+          <p><a class="btn btn--quiet" href="https://github.com/yourname/emotilog" target="_blank" rel="noopener">Source ↗</a></p>
         </article>
         <article class="card">
           <img src="https://images.unsplash.com/photo-1547658712-6e9e9bf0e3a9?q=80&w=1200&auto=format&fit=crop" alt="Notebook with code" />
@@ -290,7 +297,7 @@
           </div>
           <p>AI solver exploring A*, transposition tables, and heuristic tuning.</p>
           <div class="badges"><span class="badge">Python</span><span class="badge">Search</span></div>
-          <p><a class="btn" href="https://github.com/yourname/poe2-solver" target="_blank" rel="noopener">Source ↗</a></p>
+          <p><a class="btn btn--quiet" href="https://github.com/yourname/poe2-solver" target="_blank" rel="noopener">Source ↗</a></p>
         </article>
       </div>
     </section>
