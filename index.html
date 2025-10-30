@@ -12,7 +12,7 @@
       --bg:#3e5072;
       --panel:#454f66;       /* card & button background */
       --text:#eef1ff;
-      --muted:#bfcaf0;
+      --muted:#bfcaf0;       /* skills chip text color */
       --ring:#2a4466;
       --shadow:0 10px 30px rgba(0,0,0,.25);
     }
@@ -30,11 +30,10 @@
     html,body{height:100%}
     body{margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--text)}
     .container{max-width:1100px; margin:0 auto; padding:24px}
-
     a{color:var(--text); text-decoration:none}
     a:hover{text-decoration:underline}
 
-    /* Buttons — unified neutral style */
+    /* Buttons (neutral) */
     .btn{
       display:inline-flex; align-items:center; gap:8px;
       padding:10px 14px; border-radius:12px; border:1px solid var(--ring);
@@ -43,18 +42,16 @@
       font-size:1rem; line-height:1.6;
     }
     .btn--ghost{background:var(--panel)}
-    .btn--primary{background:var(--panel)}
-    .btn--quiet{
-      background:transparent; border:1px solid var(--ring); color:var(--muted);
-      box-shadow:none; padding:6px 10px; border-radius:10px; font-size:1rem; line-height:1.6;
+    .btn--quiet{               /* subtle in-card links */
+      background:transparent; border:1px solid var(--ring);
+      color:var(--muted); box-shadow:none; padding:6px 10px; border-radius:10px;
+      font-size:1rem; line-height:1.6;
     }
     .btn--quiet:hover{ background:color-mix(in oklab, var(--panel) 85%, transparent); text-decoration:none }
 
     /* ===== Header (Left / Center / Right) ===== */
     header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(160%) blur(8px); background:color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid color-mix(in oklab, var(--ring) 50%, transparent)}
-    nav.nav{
-      display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px;
-    }
+    nav.nav{display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px}
     .nav-left{display:flex; align-items:center; gap:10px}
     .nav-center{display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap}
     .nav-right{display:flex; align-items:center; gap:10px}
@@ -63,9 +60,13 @@
       width:34px; height:34px; border-radius:10px; display:grid; place-items:center;
       background:var(--panel); color:var(--text); border:1px solid var(--ring); box-shadow:var(--shadow)
     }
+    /* remove shadow from top nav buttons */
+    .nav-center .btn{box-shadow:none}
+
+    /* Toggle: bold like “Your Name” */
     .toggle{
       border:1px solid var(--ring); border-radius:999px; padding:8px 12px; background:var(--panel);
-      display:inline-flex; align-items:center; gap:8px; color:var(--text)
+      display:inline-flex; align-items:center; gap:8px; color:var(--text); font-weight:700;
     }
 
     /* ===== Top ===== */
@@ -105,10 +106,10 @@
     .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px}
     .card img{width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:10px; margin-bottom:10px}
 
-    /* ===== Chips (skills) — now body-size ===== */
+    /* ===== Chips (skills) — body-size ===== */
     .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
     .badge{
-      font-size:1rem; line-height:1.6;                 /* bigger to match body/link buttons */
+      font-size:1rem; line-height:1.6;
       padding:6px 10px; border-radius:999px;
       border:1px dashed var(--ring); color:var(--muted); background:transparent;
     }
@@ -116,6 +117,11 @@
     /* ===== Project meta ===== */
     .proj-meta{margin:6px 0 8px 0; color:var(--muted); font-weight:600}
     .proj-meta strong{color:inherit; font-weight:700}
+
+    /* ===== Make ALL text inside Skills & Contact cards use the muted color ===== */
+    #skills .card, #skills .card *{color:var(--muted)}
+    #contact .card, #contact .card *, #contact .card strong{color:var(--muted)}
+    #contact .card strong{font-weight:600} /* keep emphasis but same color */
   </style>
 </head>
 <body>
@@ -123,7 +129,7 @@
     <div class="container">
       <nav class="nav" aria-label="Primary">
         <div class="nav-left">
-          <a class="brand" href="#top"><span class="logo">MG</span> Marie Gateka</a>
+          <a class="brand" href="#top"><span class="logo">Y</span> Your Name</a>
         </div>
 
         <div class="nav-center">
@@ -145,7 +151,7 @@
   <main id="top" class="container">
     <!-- ===== TOP ===== -->
     <section class="top" aria-labelledby="intro-title">
-      <h1 id="intro-title">Software Engineer & Product-minded Builder</h1>
+      <h1 id="intro-title">Your Name — Software Engineer & Product-minded Builder</h1>
       <div class="contact" aria-label="Primary contact">
         <span class="pill">📍 City (open to remote)</span>
         <a class="pill" href="mailto:you@example.com">✉️ you@example.com</a>
@@ -154,6 +160,7 @@
         <a class="pill" href="resume.pdf" download>📄 Download Résumé</a>
       </div>
       <div class="summary">
+        <strong>Summary:</strong>
         <p>Previously: student leader running events & mentorship. Proven record of turning messy data and fuzzy ideas into useful tools.</p>
       </div>
     </section>
@@ -161,6 +168,8 @@
     <!-- ===== PROFESSIONAL EXPERIENCE ===== -->
     <section id="experience" class="section" aria-labelledby="pro-title">
       <h2 id="pro-title">Professional Experience</h2>
+      <p class="elevator" style="margin:0">Most recent at the top. Entries alternate sides along the timeline.</p>
+
       <div class="timeline" aria-label="Professional timeline">
         <div class="item" data-side="left">
           <div class="dot" aria-hidden="true"><img alt="Company" src="https://static-00.iconduck.com/assets.00/microsoft-icon-512x512-v3y2v3sk.png"></div>
@@ -304,18 +313,6 @@
     <section id="skills" class="section" aria-labelledby="skills-title">
       <h2 id="skills-title">Skills</h2>
       <div class="card">
-        <h3>Skills Summary</h3>
-        <div class="badges" aria-label="Skills">
-          <span class="badge">Python</span>
-          <span class="badge">JavaScript</span>
-          <span class="badge">React</span>
-          <span class="badge">SQL</span>
-          <span class="badge">dbt</span>
-          <span class="badge">BigQuery</span>
-          <span class="badge">Android/Kotlin</span>
-          <span class="badge">Figma</span>
-          <span class="badge">A/B Testing</span>
-          <span class="badge">Product thinking</span>
         <h3>Skills Summary</h3>
         <div class="badges" aria-label="Skills">
           <span class="badge">Python</span>
