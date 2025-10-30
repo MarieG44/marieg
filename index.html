@@ -141,7 +141,7 @@
 
         <div class="nav-right">
           <button id="themeToggle" type="button" class="toggle" aria-pressed="false" title="Toggle theme">
-            <span id="themeIcon">🌙</span><span id="themeLabel">Dark</span>
+            <span id="themeIcon">🌙</span><span id="themeLabel">Dark </span>
           </button>
         </div>
       </nav>
@@ -354,8 +354,8 @@
     const label = document.getElementById('themeLabel');
 
     function applyTheme(mode){
-      if(mode==='light'){ root.classList.add('light'); icon.textContent='☀️'; label.textContent='Light'; toggleBtn.setAttribute('aria-pressed','true'); }
-      else{ root.classList.remove('light'); icon.textContent='🌙'; label.textContent='Dark'; toggleBtn.setAttribute('aria-pressed','false'); }
+      if(mode==='light'){ root.classList.add('light'); icon.textContent='☀️'; label.textContent='Light Mode'; toggleBtn.setAttribute('aria-pressed','true'); }
+      else{ root.classList.remove('light'); icon.textContent='🌙'; label.textContent='Dark Mode'; toggleBtn.setAttribute('aria-pressed','false'); }
       localStorage.setItem('theme', mode);
     }
     // initial
