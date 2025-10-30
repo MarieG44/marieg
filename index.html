@@ -42,33 +42,27 @@
       box-shadow:var(--shadow);
       font-size:1rem; line-height:1.6;
     }
-    .btn--ghost{background:var(--panel)}                 /* nav buttons */
-    .btn--primary{background:var(--panel)}               /* not used now */
-
-    /* QUIET link buttons (inside cards) */
+    .btn--ghost{background:var(--panel)}
+    .btn--primary{background:var(--panel)}
     .btn--quiet{
-      background:transparent;
-      border:1px solid var(--ring);
-      color:var(--muted);          /* match skills chip text color */
-      box-shadow:none;             /* remove shadow */
-      padding:6px 10px;            /* lighter touch */
-      border-radius:10px;
-      font-size:1rem;              /* same as body text inside cards */
-      line-height:1.6;
+      background:transparent; border:1px solid var(--ring); color:var(--muted);
+      box-shadow:none; padding:6px 10px; border-radius:10px; font-size:1rem; line-height:1.6;
     }
-    .btn--quiet:hover{
-      background:color-mix(in oklab, var(--panel) 85%, transparent);
-      text-decoration:none;
-    }
+    .btn--quiet:hover{ background:color-mix(in oklab, var(--panel) 85%, transparent); text-decoration:none }
 
+    /* ===== Header (Left / Center / Right) ===== */
     header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(160%) blur(8px); background:color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid color-mix(in oklab, var(--ring) 50%, transparent)}
-    nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    nav.nav{
+      display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px;
+    }
+    .nav-left{display:flex; align-items:center; gap:10px}
+    .nav-center{display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap}
+    .nav-right{display:flex; align-items:center; gap:10px}
     .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; font-weight:700}
     .logo{
       width:34px; height:34px; border-radius:10px; display:grid; place-items:center;
       background:var(--panel); color:var(--text); border:1px solid var(--ring); box-shadow:var(--shadow)
     }
-
     .toggle{
       border:1px solid var(--ring); border-radius:999px; padding:8px 12px; background:var(--panel);
       display:inline-flex; align-items:center; gap:8px; color:var(--text)
@@ -111,10 +105,11 @@
     .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px}
     .card img{width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:10px; margin-bottom:10px}
 
-    /* ===== Chips (unified style) ===== */
+    /* ===== Chips (skills) — now body-size ===== */
     .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
     .badge{
-      font-size:12px; padding:4px 8px; border-radius:999px;
+      font-size:1rem; line-height:1.6;                 /* bigger to match body/link buttons */
+      padding:6px 10px; border-radius:999px;
       border:1px dashed var(--ring); color:var(--muted); background:transparent;
     }
 
@@ -126,13 +121,19 @@
 <body>
   <header>
     <div class="container">
-      <nav aria-label="Primary">
-        <a class="brand" href="#top"><span class="logo">Y</span> Your Name</a>
-        <div style="display:flex; gap:10px; align-items:center">
+      <nav class="nav" aria-label="Primary">
+        <div class="nav-left">
+          <a class="brand" href="#top"><span class="logo">Y</span> Your Name</a>
+        </div>
+
+        <div class="nav-center">
           <a class="btn btn--ghost" href="#experience">Experience</a>
           <a class="btn btn--ghost" href="#projects">Projects</a>
           <a class="btn btn--ghost" href="#skills">Skills</a>
           <a class="btn btn--ghost" href="#contact">Contact</a>
+        </div>
+
+        <div class="nav-right">
           <button id="themeToggle" type="button" class="toggle" aria-pressed="false" title="Toggle theme">
             <span id="themeIcon">🌙</span><span id="themeLabel">Dark</span>
           </button>
